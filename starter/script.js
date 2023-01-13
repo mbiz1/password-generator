@@ -90,16 +90,85 @@ var upperCasedCharacters = [
 
 // Function to prompt user for password options
 function getPasswordOptions() {
+let length = parseInt(
+  prompt("How many characters long would you like your password to be?")
+)
 
+if(isNaN(length) === true) {
+  alert('The password length must be provided as a number')
+  return;
+}
+
+if(length < 10) {
+  alert ('The password length must be atleast 10 characters')
+}
+if (length > 65) {
+  alert ('The password must be less than 65 characters long');
+  return;
+
+}
+let hasSpecialCharacters = confirm(
+  "Click OK to confirm including special characters in your password"
+)
+let hasNumericCharacters = confirm(
+  "Click OK to confirm including numeric characters in your password"
+
+)
+let hasLowerCasedCharacters = confirm(
+  "Click OK to confirm including lowercase characters in your password"
+)
+let hasUpperCasedCharacters = confirm(
+  "Click OK to confirm including uppercase characters in your password"
+)
+
+if(hasLowerCasedCharacters === false &&
+  hasUpperCasedCharacters === false &&
+  hasSpecialCharacters === false && 
+  hasNumericCharacters === false){
+    alert('Must select at least one character type in your password')
+    return;
+  }
+
+let passwordOptions = {
+  length: length,
+  hasSpecialCharacters: hasSpecialCharacters,
+  hasUpperCasedCharacters: hasUpperCasedCharacters,
+  haslowerCasedCharacters: hasLowerCasedCharacters
+}
+console.log(passwordOptions);
+return passwordOptions;
 }
 
 // Function for getting a random element from an array
 function getRandom(arr) {
+let randomIndex = Math.floor(Math.random() * arr.length)
+let randomElement = arr[randomIndex];
+
+return randomElement;
 
 }
 
 // Function to generate password with user input
 function generatePassword() {
+  let options = getPasswordOptions();
+console.log(options);
+let result = []
+
+let possibleCharacter = []
+
+
+let guaranteedCharacter = []
+
+if(options.hasSpecialCharacters) {
+  possibleCharacter = possibleCharacter.concat(specialCharacters)
+  guaranteedCharacter.push(getRandom(specialCharacters))
+}
+
+console.log(possibleCharacter);
+console.log(guaranteedCharacter);
+
+
+
 
 }
 
